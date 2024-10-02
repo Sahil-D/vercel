@@ -51,7 +51,20 @@ async function init() {
       return;
     }
 
-    const distFolderPath = path.join(repositoryPath, 'dist');
+    const possibleFolders = ['dist', 'build'];
+    let distFolderPath = null;
+    for (const folder of possibleFolders) {
+      const possibleFolderPath = path.join(repositoryPath, folder);
+      if (existsSync(possibleFolderPath)) {
+        distFolderPath = possibleFolderPath;
+        break;
+      }
+    }
+
+    if (!distFolderPath) {
+      console.error("Neither 'dist' nor 'build' folder found! Terminating!!!");
+      return;
+    }
 
     const distFolderContent = fs.readdirSync(distFolderPath, {
       recursive: true,

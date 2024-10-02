@@ -29,6 +29,7 @@ aws logs get-log-events --log-group-name "/ecs/builder-task" --log-stream-name "
     :: But okay, can be prioritized later
 
 4. add react build folder ka support
+    :: added, need to test
 5. custom and random projectId handle : Not Priority -----
 6. FrontEnd for API server and then host API server and proxy on an instance
 
