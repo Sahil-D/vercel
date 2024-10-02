@@ -1,0 +1,57 @@
+docker run -it --rm vercel-image /bin/bash
+
+docker run -d --restart=always bbd03522a467
+
+docker run -it ubuntu:focal
+
+docker rmi $(docker images -q) -f
+
+#containers remove
+docker rm -f $(docker ps -a -q)
+
+#remove images
+
+https://github.com/Sahil-D/vite-sample
+
+// todo
+
+Kafka integration = for log pipeline, analytics storage
+
+Log collection pipeline (aiven : redis) - for reducing my workload, i wont make a log pipeline, i will see if any error message is there. - if error occur then i will store that in that Deployment itself and when user is polling and will show that error there - otherwise if deployment success, user dont have any problem ig.
+
+Or I am somehow trying, not to store logs and just stream them, or can I poll, I am not sure
+or can i simply take logs from that task ??
+
+ecs/task-vercel-image/34190ed6f407446494a3db2ec2522cfa :: no logs for older events
+
+// to list log groups
+aws logs describe-log-groups
+
+// to list log streams
+aws logs describe-log-streams --log-group-name "/ecs/builder-task"
+
+// to list logs
+// I need taskId only
+aws logs get-log-events --log-group-name "/ecs/builder-task" --log-stream-name "ecs/task-vercel-image/7dbbcc94230441979f06f1baf1da73fb" --limit 100
+
+add react build folder ka support
+custom and random projectId handle
+check what all to be changed while updating AWS client
+
+---
+
+prisma
+
+migration
+
+delete migration query which is idle at aiven
+
+npx prisma migrate dev --name remove-uuid-default-from-deployment-id
+
+or
+npx prisma db execute --file /path/to/your/migration.sql
+
+---
+
+map projectId => it index.html from s3
+API server => Proxy server => S3

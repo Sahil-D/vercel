@@ -1,0 +1,1 @@
+ALTER TABLE "Deployment" ALTER COLUMN "id" DROP DEFAULT;
