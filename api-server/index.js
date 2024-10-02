@@ -139,18 +139,18 @@ app.post('/deploy', async (req, res) => {
   const response = await ecsClient.send(command);
   const taskArn = response.tasks[0].taskArn;
   const taskId = taskArn.split('/').pop();
-  console.log('Task ID : ', taskId);
+  console.log('Task created : ', taskId);
 
   const deployment = await prisma.deployment.create({
     data: {
       id: taskId,
       project: { connect: { id: projectId } },
-      status: 'QUEUED',
+      status: DeploymentStatus.QUEUED,
     },
   });
 
   return res.json({
-    status: 'queued',
+    status: 'QUEUED',
     data: {
       deployment,
       projectSlug,

@@ -26,7 +26,7 @@ const s3Client = new S3Client({
 });
 
 async function init() {
-  console.log('executing script.js');
+  console.log('Container started to process project...');
   const repositoryPath = path.join(__dirname, PROJECT_FOLDER_NAME);
 
   const build_command = spawn('sh', [
@@ -75,6 +75,7 @@ async function init() {
       console.log('Done... ');
       process.exit(0);
     }
+    console.log('Successfully Deployed :)');
   });
 }
 
