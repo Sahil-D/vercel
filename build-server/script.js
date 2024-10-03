@@ -55,7 +55,7 @@ async function init() {
     let distFolderPath = null;
     for (const folder of possibleFolders) {
       const possibleFolderPath = path.join(repositoryPath, folder);
-      if (existsSync(possibleFolderPath)) {
+      if (fs.existsSync(possibleFolderPath)) {
         distFolderPath = possibleFolderPath;
         break;
       }
@@ -86,9 +86,9 @@ async function init() {
 
       await s3Client.send(putFileToS3Command);
       console.log('Done... ');
-      process.exit(0);
     }
     console.log('Successfully Deployed :)');
+    process.exit(0);
   });
 }
 
