@@ -130,6 +130,26 @@ app.post('/deploy', async (req, res) => {
           environment: [
             { name: 'GIT_REPOSITORY_URL', value: project.gitURL },
             { name: 'PROJECT_ID', value: projectSlug },
+            {
+              name: 'PROJECT_FOLDER_NAME',
+              value: process.env.DOCKER_VAR_PROJECT_FOLDER_NAME,
+            },
+            {
+              name: 'AWS_S3_BUCKET_NAME',
+              value: process.env.DOCKER_VAR_AWS_S3_BUCKET_NAME,
+            },
+            {
+              name: 'AWS_S3_REGION',
+              value: process.env.DOCKER_VAR_AWS_S3_REGION,
+            },
+            {
+              name: 'AWS_S3_ACCESS_KEY_ID',
+              value: process.env.DOCKER_VAR_AWS_S3_ACCESS_KEY_ID,
+            },
+            {
+              name: 'AWS_S3_SECRET_ACCESS_KEY',
+              value: process.env.DOCKER_VAR_AWS_S3_SECRET_ACCESS_KEY,
+            },
           ],
         },
       ],
