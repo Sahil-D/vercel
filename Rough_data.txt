@@ -28,10 +28,11 @@ aws logs get-log-events --log-group-name "/ecs/builder-task" --log-stream-name "
     :: For this, I can log some states in container in format STATE=XYZ and poll getEvents and check latest state
     :: But okay, can be prioritized later
 
-4. add react build folder ka support
-    :: added, need to test
+4. add react build folder ka support => done
+    :: added, need to test => done
 5. custom and random projectId handle : Not Priority -----
-6. FrontEnd for API server and then host API server and proxy on an instance
+6. How env vars, that the gir repo project needs, will be populated : done
+7. FrontEnd for API server and then host API server and proxy on an instance
 
 ------------------------------------------
 

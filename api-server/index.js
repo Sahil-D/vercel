@@ -49,6 +49,7 @@ app.post('/project', async (req, res) => {
   const schema = z.object({
     name: z.string(),
     gitURL: z.string(),
+    environmentVariables: z.array(z.record(z.string())),
   });
 
   const parsedBody = schema.safeParse(req.body);
@@ -56,7 +57,7 @@ app.post('/project', async (req, res) => {
   if (parsedBody.error)
     return res.status(400).json({ error: parsedBody.error });
 
-  const { name, gitURL } = parsedBody.data;
+  const { name, gitURL, environmentVariables } = parsedBody.data;
 
   let projectSlug = generateSlug();
 
@@ -76,6 +77,7 @@ app.post('/project', async (req, res) => {
       name,
       gitURL,
       subDomain: projectSlug + '-' + name,
+      environmentVariables,
     },
   });
 
@@ -109,6 +111,15 @@ app.post('/deploy', async (req, res) => {
   }
 
   const projectSlug = project.subDomain;
+
+  const repoEnvironmentVariables = project.environmentVariables.flatMap(
+    (obj) => {
+      return Object.entries(obj).map(([key, value]) => ({
+        name: key,
+        value: value,
+      }));
+    }
+  );
 
   // Spin the container
   const command = new RunTaskCommand({
@@ -150,6 +161,7 @@ app.post('/deploy', async (req, res) => {
               name: 'AWS_S3_SECRET_ACCESS_KEY',
               value: process.env.DOCKER_VAR_AWS_S3_SECRET_ACCESS_KEY,
             },
+            ...repoEnvironmentVariables,
           ],
         },
       ],

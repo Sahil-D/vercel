@@ -22,11 +22,12 @@ enum DeploymentStatus {
 }
 
 model Project {
-  id         String       @id @default(uuid())
-  name       String
-  gitURL     String       @map("git_url")
-  subDomain  String       @map("subdomain")
-  Deployment Deployment[]
+  id                   String       @id @default(uuid())
+  name                 String
+  gitURL               String       @map("git_url")
+  subDomain            String       @map("subdomain")
+  environmentVariables Json         @default("[]") @map("env_var")
+  Deployment           Deployment[]
 }
 
 model Deployment {
