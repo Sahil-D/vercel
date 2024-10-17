@@ -1,0 +1,23 @@
+
+  .buttonCard {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+  
+  .btn {
+    background-color: #b74df0;
+    padding: 60px 60px 60px 60px;
+    border-radius: 14px;
+    border: #888 2px;
+    font-size: large;
+  }
+  
+  .btn:hover {
+    cursor: pointer;
+  }
+  
+  .card {
+    padding: 2em;
+  }

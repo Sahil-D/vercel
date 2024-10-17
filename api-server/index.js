@@ -171,7 +171,7 @@ app.post('/deploy', async (req, res) => {
   const response = await ecsClient.send(command);
   const taskArn = response.tasks[0].taskArn;
   const taskId = taskArn.split('/').pop();
-  console.log('Task created : ', taskId);
+  // console.log('Task created : ', taskId);
 
   const deployment = await prisma.deployment.create({
     data: {
@@ -191,8 +191,8 @@ app.post('/deploy', async (req, res) => {
   });
 });
 
-app.get('/logs', async (req, res) => {
-  const { deploymentId } = req.body;
+app.get('/logs/:deploymentId', async (req, res) => {
+  const deploymentId = req.params.deploymentId;
 
   const deployment = await prisma.deployment.findUnique({
     where: {
@@ -211,7 +211,7 @@ app.get('/logs', async (req, res) => {
     const getLogEventsCommand = new GetLogEventsCommand({
       logGroupName: LOG_GROUP_NAME,
       logStreamName: LOG_STREAM_NAME,
-      limit: parseInt(process.env.AWS_ECS_LOG_LIMIT, 10),
+      limit: parseInt(process.env.AWS_ECS_LOG_LIMIT, 100),
     });
 
     const response = await cloudWatchLogsClient.send(getLogEventsCommand);
@@ -222,6 +222,38 @@ app.get('/logs', async (req, res) => {
   } catch (e) {
     return res.status(500).json({ error: 'Error fetching logs: ' + e });
   }
+});
+
+app.get('/project', async (req, res) => {
+  // return list of projects
+  const response = await prisma.project.findMany();
+  return res.status(200).json({ data: response.reverse() });
+});
+
+app.get('/deployment/:projectId', async (req, res) => {
+  const projectId = req.params.projectId;
+
+  // find deployment if any
+  const deployment = await prisma.deployment.findFirst({
+    where: {
+      projectId: projectId,
+    },
+  });
+
+  return res.status(200).json({ data: deployment });
+});
+
+app.get('/project/:projectId', async (req, res) => {
+  const projectId = req.params.projectId;
+
+  // find deployment if any
+  const project = await prisma.project.findUnique({
+    where: {
+      id: projectId,
+    },
+  });
+
+  return res.status(200).json({ data: project });
 });
 
 app.listen(PORT, () => console.log(`API server running on PORT : ${PORT} `));

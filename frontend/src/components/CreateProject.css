@@ -1,0 +1,36 @@
+label {
+    display: flex;
+    color: #b74df0;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    font-size: x-large;
+    padding: 10px 10px 10px 10px;
+}
+
+form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    color: #b74df0;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    font-size: x-large;
+}
+
+.form button {
+    align-self: center;
+    margin-top: 10px;
+    width: 50%;
+    height: 40px;
+    font-size: large;
+}
+
+.form input {
+    height: 40px;
+    width: 60%;
+    font-size: large;
+}

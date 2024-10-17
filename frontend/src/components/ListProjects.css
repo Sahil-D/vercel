@@ -1,0 +1,25 @@
+.contianer{
+    display: flex;
+    flex-direction: column;
+    /* background-color: yellow; */
+    width: 100%;
+    align-items: center;
+}
+
+h2 {
+    color: #b74df0
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    background-color: #b74df0;
+    font-size: large;
+    width: 60%;
+    margin-bottom: 10px;
+    border-radius: 12px;
+}
+
+.card:hover{
+    cursor: pointer;
+}

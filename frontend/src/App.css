@@ -1,0 +1,24 @@
+#root {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.rootPage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header {
+  color: #b74df0;
+  width: 100%;
+  height: 80px;
+  text-align: center;
+}
+
+.componentPart {
+  padding-top: 10px;
+  /* background-color: blue; */
+  display: flex;
+  justify-content: center;
+}
+
