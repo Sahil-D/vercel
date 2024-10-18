@@ -9,14 +9,17 @@ const PORT = process.env.PORT;
 const PROXY_BASE_PATH = process.env.PROXY_BASE_PATH;
 const OUTPUT_FOLDER = process.env.OUTPUT_FOLDER;
 
+// this can be used for any get call /asset /x /y
 app.use((req, res) => {
   const hostname = req.hostname;
-  const subdomain = hostname.split('.')[0];
+  if (hostname) {
+    const subdomain = hostname.split('.')[0];
 
-  console.log('resolving subDomain : ', subdomain);
-  const resolvesTo = `${PROXY_BASE_PATH}/${OUTPUT_FOLDER}/${subdomain}`;
+    console.log('resolving subDomain : ', subdomain);
+    const resolvesTo = `${PROXY_BASE_PATH}/${OUTPUT_FOLDER}/${subdomain}`;
 
-  return proxy.web(req, res, { target: resolvesTo, changeOrigin: true });
+    return proxy.web(req, res, { target: resolvesTo, changeOrigin: true });
+  }
 });
 
 proxy.on('proxyReq', (proxyReq, req, res) => {
