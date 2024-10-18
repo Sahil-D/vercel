@@ -12,9 +12,8 @@ const OUTPUT_FOLDER = process.env.OUTPUT_FOLDER;
 // this can be used for any get call /asset /x /y
 app.use((req, res) => {
   const hostname = req.hostname;
-  if (hostname) {
-    const subdomain = hostname.split('.')[0];
-
+  const subdomain = hostname.split('.')[0];
+  if (subdomain) {
     console.log('resolving subDomain : ', subdomain);
     const resolvesTo = `${PROXY_BASE_PATH}/${OUTPUT_FOLDER}/${subdomain}`;
 
