@@ -8,7 +8,7 @@ const {
 const cors = require('cors');
 const { z } = require('zod');
 const { PrismaClient, DeploymentStatus } = require('@prisma/client');
-
+require('dotenv').config();
 const app = express();
 
 const PORT = process.env.PORT;
