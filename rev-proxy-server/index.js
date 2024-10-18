@@ -6,13 +6,15 @@ const app = express();
 const proxy = httpProxy.createProxy();
 
 const PORT = process.env.PORT;
-const BASE_PATH = process.env.BASE_PATH;
+const PROXY_BASE_PATH = process.env.PROXY_BASE_PATH;
+const OUTPUT_FOLDER = process.env.OUTPUT_FOLDER;
 
 app.use((req, res) => {
   const hostname = req.hostname;
   const subdomain = hostname.split('.')[0];
 
-  const resolvesTo = `${BASE_PATH}/${subdomain}`;
+  console.log('resolving subDomain : ', subdomain);
+  const resolvesTo = `${PROXY_BASE_PATH}/${OUTPUT_FOLDER}/${subdomain}`;
 
   return proxy.web(req, res, { target: resolvesTo, changeOrigin: true });
 });
