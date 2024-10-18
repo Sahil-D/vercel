@@ -18,6 +18,10 @@ const PROXY_SERVER_PORT = process.env.PROXY_SERVER_PORT;
 const AWS_ECS_ACCESS_KEY_ID = process.env.AWS_ECS_ACCESS_KEY_ID; // isme ECS_Task_spin_user
 const AWS_ECS_SECRET_ACCESS_KEY = process.env.AWS_ECS_SECRET_ACCESS_KEY;
 
+// User with CloudWatch logs access
+const AWS_CW_ACCESS_KEY_ID = process.env.AWS_CW_ACCESS_KEY_ID;
+const AWS_CW_SECRET_ACCESS_KEY = process.env.AWS_CW_SECRET_ACCESS_KEY;
+
 // cluster config
 const AWS_ECS_CLUSTER = process.env.AWS_ECS_CLUSTER;
 const AWS_ECS_TASK = process.env.AWS_ECS_TASK;
@@ -33,6 +37,10 @@ const ecsClient = new ECSClient({
 
 const cloudWatchLogsClient = new CloudWatchLogsClient({
   region: AWS_ECS_REGION,
+  credentials: {
+    accessKeyId: AWS_CW_ACCESS_KEY_ID,
+    secretAccessKey: AWS_CW_SECRET_ACCESS_KEY,
+  },
 });
 
 const config = {
