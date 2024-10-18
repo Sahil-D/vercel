@@ -12,7 +12,7 @@ require('dotenv').config();
 const app = express();
 
 const PORT = process.env.PORT;
-const PROXY_SERVER_PORT = process.env.PROXY_SERVER_PORT;
+const PROXY_SERVER_HOST = process.env.PROXY_SERVER_HOST;
 
 // User with ECS access only
 const AWS_ECS_ACCESS_KEY_ID = process.env.AWS_ECS_ACCESS_KEY_ID; // isme ECS_Task_spin_user
@@ -194,7 +194,7 @@ app.post('/deploy', async (req, res) => {
     data: {
       deployment,
       projectSlug,
-      url: `http://${projectSlug}.localhost:${PROXY_SERVER_PORT}`,
+      url: `http://${projectSlug}.${PROXY_SERVER_HOST}`,
     },
   });
 });
