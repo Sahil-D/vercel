@@ -59,12 +59,19 @@ export function ProjectDetails() {
     <div className="contianer">
       <h2>Project {projectSubDomain} Details :-</h2>
       <h2>
-        {isLoading
-          ? 'Loading...'
-          : deploymentId
-          ? 'Project already deployed at => ' +
-            `http://${projectSubDomain}.${config.REVERSE_PROXY_HOST}`
-          : 'Project not deployed yet'}
+        {isLoading ? (
+          'Loading...'
+        ) : deploymentId ? (
+          <span>
+            {'Project already deployed at =>'}
+            <a
+              href={`http://${projectSubDomain}.${config.REVERSE_PROXY_HOST}`}
+              target="_blank"
+            >{`http://${projectSubDomain}.${config.REVERSE_PROXY_HOST}`}</a>
+          </span>
+        ) : (
+          'Project not deployed yet'
+        )}
       </h2>
       {isLoading ? (
         ''

@@ -21,6 +21,10 @@ h2 {
     cursor: pointer;
 }
 
+a{
+    color: #b74df0
+}
+
 span{ 
     color: #b74df0;
     font-size: x-large;
