@@ -23,8 +23,6 @@ export function CreateProject() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Project Name:', projectName);
-    console.log('Project Git URL:', projectGitUrl);
 
     const formattedEnvironmentVariables = environmentVariables.map((pair) => {
       return { [pair.key]: pair.value };
@@ -36,7 +34,6 @@ export function CreateProject() {
         gitURL: projectGitUrl,
         environmentVariables: formattedEnvironmentVariables,
       });
-      console.log(res);
       alert(
         'Project created with name : ' + res.data?.data?.project?.subDomain
       );
@@ -55,7 +52,7 @@ export function CreateProject() {
             type="text"
             value={projectName}
             onChange={(e) => setProjectName(e.target.value)}
-            placeholder="Project name"
+            placeholder="Project name separated with -"
           />
         </label>
         <label>
@@ -64,7 +61,7 @@ export function CreateProject() {
             type="text"
             value={projectGitUrl}
             onChange={(e) => setProjectGitUrl(e.target.value)}
-            placeholder="Project git url"
+            placeholder="Vite/React Project git url"
           />
         </label>
 
@@ -85,7 +82,7 @@ export function CreateProject() {
               onChange={(event) =>
                 handleEnvironmentVariableChange(index, event)
               }
-              placeholder="Key"
+              placeholder="Key with prefix VITE_ / REACT_APP_"
               style={{ marginRight: '10px' }}
             />
             <input
