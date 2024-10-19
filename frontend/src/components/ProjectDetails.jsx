@@ -63,11 +63,13 @@ export function ProjectDetails() {
           'Loading...'
         ) : deploymentId ? (
           <span>
-            {'Project already deployed at =>'}
+            {'Project already deployed => '}
             <a
               href={`http://${projectSubDomain}.${config.REVERSE_PROXY_HOST}`}
               target="_blank"
-            >{`http://${projectSubDomain}.${config.REVERSE_PROXY_HOST}`}</a>
+            >
+              Web App Link
+            </a>
           </span>
         ) : (
           'Project not deployed yet'
